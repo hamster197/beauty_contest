@@ -1,0 +1,11 @@
+ {% extends '_main.html' %}
+{% load widget_tweaks %}
+ {% block content %}
+{#     <p>Votes</p>#}
+{#{% if request.user.groups.get.name == 'Jury' %}#}
+     {% include 'votes/_vote.html' %}
+
+{#{% elif request.user.groups.get.name == 'Leader' %}#}
+{#         {% include 'votes/_rezult.html' %}#}
+{#{% endif %}#}
+ {% endblock %}

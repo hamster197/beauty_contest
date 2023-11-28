@@ -1,0 +1,9 @@
+/.idea
+/image
+users/migrations
+app/__pycache__
+users/__pycache__
+apps/votes/migrations
+apps/votes/__pycache__
+db.sqlite3
+.env

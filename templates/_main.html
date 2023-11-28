@@ -1,0 +1,29 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="ru-ru" class="no-js" itemscope itemtype="https://schema.org/WebPage">
+<head>
+<meta name="theme-color" content="#003ba5">
+<meta name="format-detection" content="telephone=no">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="shortcut icon" href="/static/front/favicon.png">
+<title>Голосование МГМСУ</title>
+<meta name="description" content="Голосование конкурс МГМСУ" />
+<link href="/static/front/stom.css" rel="stylesheet">
+<script src="/static/front/stom.js"></script>
+</head>
+<body class="stom-background-primary" stom-height-viewport>
+
+{% load widget_tweaks %}
+{% if user.is_authenticated %}<div class="stom-section stom-section-primary">
+<div class="stom-container stom-text-center stom-text-right@m">
+   <a class="stom-button stom-button-primary" href="{% url "accounts:logout" %}" >Выход</a>
+</div>
+</div>
+{% endif %}
+
+{% block content %}
+
+{% endblock %}
+</body>
+</html>

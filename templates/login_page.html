@@ -1,0 +1,34 @@
+ {% extends '_main.html' %}
+{% load widget_tweaks %}
+{% block content %}
+<div class="stom-section stom-preserve-color">
+<div class="stom-container">
+<div class="stom-grid">
+<div class="stom-width-2-3@m"></div>
+<div class="stom-width-1-3@m">
+<div class="stom-card stom-card-default stom-card-body">
+    <h1 class="stom-h3 stom-text-bolder">Вход в аккаунт</h1>
+	<hr>
+    <form method="post" action=".">
+  {% csrf_token %}
+     <div class="mui--text-danger">
+    {% for error in form.non_field_errors %}
+      {{error}}
+    {% endfor %}
+  </div>
+      <div class="mui-textfield">
+    <label class="stom-form-label">{{ form.username.label }}</label>
+    {{ form.username|add_class:'stom-margin stom-input' }}
+  </div>
+  <div class="mui-textfield">
+    <label class="stom-form-label">{{ form.password.label }}</label>
+    {{ form.password|add_class:'stom-margin stom-input' }}
+  </div>
+
+  <input class="stom-button stom-button-primary" type="submit" value='Войти' />
+    </form>
+</div>
+</div>
+</div>
+</div>	
+ {% endblock %}

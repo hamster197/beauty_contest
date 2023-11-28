@@ -1,0 +1,35 @@
+<div class="stom-section stom-section-primary stom-padding-remove-top stom-preserve-color">
+<div class="stom-container">
+<h1 class="stom-h3 stom-text-bolder stom-light stom-margin-medium-bottom">Голосование</h1>
+
+  <form method="post" >{% csrf_token %}
+
+{% for instance in instances %} <div class="stom-flex stom-flex-middle stom-background-muted stom-grid-match" stom-grid style="background:#ededed;border-radius:20px;">
+    <div class="stom-width-auto@m"><div><p class="stom-text-center stom-padding-small">{{ instance.user_id }}</p></div></div>
+	<div class="stom-width-1-4@m"><div class="stom-text-center"><img class="stom-border-circle stom-padding-small" src="/image/{{ instance.photo }}" width="200" height="200"></div></div>
+	<div class="stom-width-1-3@m"><div><p class="stom-text-large stom-text-bold">{{ instance.full_name }}</p></div></div>  
+    {% if user.groups.get.name == 'Jury' %}<div class="stom-width-1-4@m"><div class="stom-padding-small"> Оценка:
+    {% if instance.get_user_estimation.all %}
+    {% for rezult in instance.get_user_estimation.all %}  <span class="stom-h4 stom-text-bold">{{ rezult }}</span>
+        <p><label><input class="stom-radio" name="{{ instance.pk }}" type="radio" value="1" {% if rezult.estimation == 1 %}checked{% endif %}> 1 </label></p>
+        <p><label><input class="stom-radio" name="{{ instance.pk }}" type="radio" value="2"{% if rezult.estimation == 2 %}checked{% endif %}> 2</label></p>
+        <p><label><input class="stom-radio" name="{{ instance.pk }}" type="radio" value="3" {% if rezult.estimation == 3 %}checked{% endif %}> 3</label></p>
+    {% endfor %}
+    {% else %} <span class="stom-h4 stom-text-bold">0</span>
+         <p><label><input class="stom-radio" name="{{ instance.pk }}" type="radio" value="1" checked> 1 </label></p>
+        <p><label><input class="stom-radio" name="{{ instance.pk }}" type="radio" value="2" > 2 </label></p>
+        <p><label><input class="stom-radio" name="{{ instance.pk }}" type="radio" value="3" > 3 </label></p>
+    {% endif %}</div></div>
+    {% elif user.groups.get.name == 'Leader' %} <div class="stom-width-1-4@m"><div><p class>Итоговая оценка</p>
+    {% if instance.get_participant_estimation.estimation__sum %}
+    <p class="stom-margin"><span class="stom-h4 stom-text-bold">{{ instance.get_participant_estimation.estimation__sum }}</span></p>
+    {% else %} <p class="stom-margin"><span class="stom-h4 stom-text-bold">0</span></p> {% endif %}
+    </div></div>{% endif %}
+    
+</div>{% endfor %}
+
+    <p class="stom-margin-medium stom-light"><input class="stom-button stom-button-default" type="submit" value="Выбрать"></p>
+  </form>
+ 
+  </div>
+  </div>
