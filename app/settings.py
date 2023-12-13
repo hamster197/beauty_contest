@@ -47,7 +47,7 @@ INSTALLED_APPS = [
     'widget_tweaks',
 
     'users',
-    'apps.votes',
+    'apps.tours_vote',
 ]
 
 MIDDLEWARE = [
@@ -123,8 +123,8 @@ USE_I18N = True
 USE_TZ = True
 
 LOGIN_URL = reverse_lazy('accounts:login')
-LOGIN_REDIRECT_URL = reverse_lazy('votes:index')
-LOGOUT_REDIRECT_URL = LOGIN_URL#reverse_lazy('accounts:login')
+LOGIN_REDIRECT_URL = reverse_lazy('tours_votes:index')
+LOGOUT_REDIRECT_URL = LOGIN_URL
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/4.2/howto/static-files/
@@ -133,7 +133,13 @@ MEDIA_URL = 'image/'
 MEDIA_ROOT = os.path.join(BASE_DIR, "image")
 
 STATIC_URL = 'static/'
-STATIC_ROOT = os.path.join(BASE_DIR, "static/")
+
+if not DEBUG:
+    STATIC_ROOT = os.path.join(BASE_DIR, "static/")
+else:
+    STATICFILES_DIRS = [
+        os.path.join(BASE_DIR, 'static/'),
+    ]
 
 import socket
 

@@ -1,0 +1,9 @@
+ {% extends '_main.html' %}
+{% load widget_tweaks %}
+ {% block content %}
+     <strong>results</strong>
+     {% for instance in instances %}
+         <p>{{ instance.user_id }} {{ instance.full_name }} {{ instance.tour_vote_results_participant_id__estimation__sum }}</p>
+     {% endfor %}
+
+ {% endblock %}

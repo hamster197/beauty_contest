@@ -3,7 +3,8 @@
 users/migrations
 app/__pycache__
 users/__pycache__
-apps/votes/migrations
-apps/votes/__pycache__
+apps/tours_vote/migrations
+apps/tours_vote/__pycache__
+apps/tours_vote/templatetags/__pycache__/
 db.sqlite3
 .env

@@ -1,0 +1,30 @@
+ {% extends '_main.html' %}
+{% load widget_tweaks %}
+ {% block content %}
+{% load tour_tags %}
+<strong>Название конкурса  {{ view.active_tour }}</strong>
+<strong>your step {{ view.step_instance.step|add:'1' }} from {{ view.active_vote.tours.all.count }}</strong>
+<form method="post" >
+   {% csrf_token %}
+   {% for instance in instances %}
+   <p>{{ instance.user_id }} {{ instance.full_name }} {{ instance.photo }}
+   estimation sum {% get_tour_sum_estimation instance as estimation__sum %} {{ estimation__sum.estimation__sum }}
+      {% for item in view.active_tour.tours_question_type_id.all %}
+   <p>{{ item.title }} user estimation {% get_tour_estimation instance item as estimation %} {{ estimation }}
+   </p>
+      {% for _ in ''|center:item.max_estimation|add:'1' %}
+      <input type="radio" name="{{ instance.pk }}_{{ item.pk }}" value="{{ forloop.counter0 }}"
+      {% if estimation == forloop.counter0 %} checked {% endif %}> {{ forloop.counter0 }} <Br>
+      {% endfor %}
+   </p>
+   {% endfor %}
+   </p>
+   {% endfor %}
+   <p class="stom-margin-medium stom-light"><input class="stom-button stom-button-default" type="submit"
+                                                   name='_get_estimation' value="Выбрать"></p>
+<p class="stom-margin-medium stom-light"><input class="stom-button stom-button-default" type="submit"
+                                                   name='_next_step' value="Next"></p>
+<p class="stom-margin-medium stom-light"><input class="stom-button stom-button-default" type="submit"
+                                                   name='_previous_step' value="Previous"></p>
+</form>
+{% endblock %}
